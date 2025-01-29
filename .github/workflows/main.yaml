@@ -40,11 +40,11 @@ jobs:
     #   if: runner.os == 'Linux'
     #   run: echo "MESON_NATIVE_FILE=/project/conan_meson_native.ini" >> $GITHUB_ENV
 
-    #   # On project macos and windows, the project (from checkout) is stored
-    #   # github.workspace.
-    # - name: Prepare for build on macOS
-    #   if: runner.os == 'macOS'
-    #   run: echo "MESON_NATIVE_FILE=${{ github.workspace }}/conan_meson_native.ini" >> $GITHUB_ENV
+      # On project macos and windows, the project (from checkout) is stored
+      # github.workspace.
+    - name: Prepare for build on macOS
+      if: runner.os == 'macOS'
+      run: echo "FC=gfortran-14" >> $GITHUB_ENV
 
     # - name: Prepare for build on Windows
     #   if: runner.os == 'Windows'
