@@ -75,6 +75,7 @@ jobs:
         CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
         CIBW_SKIP: "*musllinux*"
         CIBW_ENVIRONMENT_MACOS: CC=gcc-14 FC=gfortran-14
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
 
     - uses: actions/upload-artifact@v4
       with:
