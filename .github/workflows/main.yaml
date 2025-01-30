@@ -54,9 +54,10 @@ jobs:
       uses: msys2/setup-msys2@v2
       with:
         msystem: MINGW64
+        path-type: inherit
         # update: true
         release: false # try to use the MSYS2 installation provided by the runner
-        install: cmake mingw-w64-x86_64-toolchain mingw-w64-python-pipx
+        install: mingw-w64-x86_64-toolchain
 
     # On windows we cannot use the composite action provided by cibuildwheel
     # as we need to execute the build in the msys shell
