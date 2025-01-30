@@ -72,15 +72,20 @@ jobs:
       uses: msys2/setup-msys2@v2
       with:
         msystem: MINGW64
-        update: true
+        # update: true
         release: false # try to use the MSYS2 installation provided by the runner
-        install: cmake mingw-w64-x86_64-toolchain python
+        install: cmake mingw-w64-x86_64-toolchain python python-pip
 
     # On windows we cannot use the composite action provided by cibuildwheel
     # as we need to execute the build in the msys shell
-    - name: blabla
+    - name: Build wheels (MSYS2)
       if: runner.os == 'Windows'
       shell: msys2 {0}
+      env:
+        # cibuildwheel does not yet include delvewheel by default and thus does not
+        # repair wheels on windows. Therefore, add this
+        CIBW_BEFORE_BUILD: pip install delvewheel
+        CIBW_REPAIR_WHEEL_COMMAND: delvewheel repair -w {dest_dir} {wheel}
       run: |
         pip install cibuildwheel
         cibuildwheel --output-dir ./wheelhouse FMM3D
